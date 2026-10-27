@@ -17,17 +17,32 @@ Replace this paragraph with your own summary of what your version does.
 
 ## How The System Works
 
-Explain your design in plain language.
+A content-based recommender: it matches each song's own features to the user's stated taste.
 
-Some prompts to answer:
+```
+UserProfile ─┐
+             ├─► score each song ─► sort high→low ─► top k + reasons
+songs.csv ───┘
+```
 
-- What features does each `Song` use in your system
-  - For example: genre, mood, energy, tempo
-- What information does your `UserProfile` store
-- How does your `Recommender` compute a score for each song
-- How do you choose which songs to recommend
+- **Song features used:** genre, mood, energy, valence, acousticness. Tempo and danceability are skipped because they move almost exactly with energy in this data.
+- **UserProfile stores:** favorite genre, favorite mood, target energy (0–1), target valence (0–1, default 0.5), likes acoustic (yes/no).
+- **Scoring (max 5 points):** exact matches and closeness checks are worth 2.5 each, so no single feature dominates.
+  - Genre match: +1.5
+  - Mood match: +1.0
+  - Energy: up to +1.5, using `1 − |song − target|`, so the *closest* song wins, not the highest
+  - Valence: up to +0.5, same closeness rule
+  - Acousticness: up to +0.5, same closeness rule (target 0.8 if the user likes acoustic, 0.2 if not)
+- **Choosing songs:** sort all songs by score, return the top k (default 5), each with a short reason like "genre match (+1.5)".
 
-You can include a simple diagram or bullet list if helpful.
+**Expected biases:**
+
+- Most genres have only one song, so many users get at most one genre match. Lofi (3 songs) and chill (3 songs) fans get the most full matches.
+- Matching is exact text: "indie pop" ≠ "pop" and "relaxed" ≠ "chill", so close fits lose points over a label.
+- Mid-range songs are never far from any target, so they score decently for everyone, while extreme songs (classical, metal) only rank for users who want that extreme.
+- The yes/no acoustic setting and the 0.5 valence default push results toward songs near those values.
+
+
 
 ---
 
@@ -71,12 +86,47 @@ You can add more tests in `tests/test_recommender.py`.
 Paste a sample of your recommender's output here as a text block so a reader can see what it produces:
 
 ```
-# e.g.:
-# User profile: genre=indie, mood=chill, energy=low
-# Recommendations:
-#   1. ...
-#   2. ...
-#   3. ...
+==================================================
+ Top Recommendations
+==================================================
+
+1. Midnight Coding by LoRoom
+   Score: 4.89 / 5.00
+     - genre match: lofi (+1.5)
+     - mood match: chill (+1.0)
+     - energy 0.42 vs target 0.40 (+1.47)
+     - valence 0.56 vs target 0.50 (+0.47)
+     - acousticness 0.71 vs target 0.80 (+0.45)
+
+2. Library Rain by Paper Lanterns
+   Score: 4.84 / 5.00
+     - genre match: lofi (+1.5)
+     - mood match: chill (+1.0)
+     - energy 0.35 vs target 0.40 (+1.42)
+     - valence 0.60 vs target 0.50 (+0.45)
+     - acousticness 0.86 vs target 0.80 (+0.47)
+
+3. Focus Flow by LoRoom
+   Score: 3.95 / 5.00
+     - genre match: lofi (+1.5)
+     - energy 0.40 vs target 0.40 (+1.50)
+     - valence 0.59 vs target 0.50 (+0.46)
+     - acousticness 0.78 vs target 0.80 (+0.49)
+
+4. Spacewalk Thoughts by Orbit Bloom
+   Score: 3.19 / 5.00
+     - mood match: chill (+1.0)
+     - energy 0.28 vs target 0.40 (+1.32)
+     - valence 0.65 vs target 0.50 (+0.42)
+     - acousticness 0.92 vs target 0.80 (+0.44)
+
+5. Coffee Shop Stories by Slow Stereo
+   Score: 2.31 / 5.00
+     - energy 0.37 vs target 0.40 (+1.46)
+     - valence 0.71 vs target 0.50 (+0.40)
+     - acousticness 0.89 vs target 0.80 (+0.46)
+
+==================================================
 ```
 
 **Screenshot or video** *(optional)*: <!-- Insert a screenshot or demo video link here -->
