@@ -129,8 +129,6 @@ Paste a sample of your recommender's output here as a text block so a reader can
 ==================================================
 ```
 
-**Screenshot or video** *(optional)*: <!-- Insert a screenshot or demo video link here -->
-
 ---
 
 ## Experiments You Tried
@@ -140,6 +138,8 @@ Use this section to document the experiments you ran. For example:
 - What happened when you changed the weight on genre from 2.0 to 0.5
 - What happened when you added tempo or valence to the score
 - How did your system behave for different types of users
+
+I doubled the importance of energy and half the importance of genre.
 
 ---
 
@@ -154,6 +154,133 @@ Examples:
 - It might over favor one genre or mood
 
 You will go deeper on this in your model card.
+
+---
+
+## Various Profile Recommendations
+
+```
+==================================================
+ Top Recommendations: High-Energy Pop
+==================================================
+
+1. Sunrise City by Neon Echo
+   Score: 4.94 / 5.00
+     - genre match: pop (+1.5)
+     - mood match: happy (+1.0)
+     - energy 0.82 vs target 0.85 (+1.46)
+     - valence 0.84 vs target 0.85 (+0.49)
+     - acousticness 0.18 vs target 0.20 (+0.49)
+
+2. Gym Hero by Max Pulse
+   Score: 3.76 / 5.00
+     - genre match: pop (+1.5)
+     - energy 0.93 vs target 0.85 (+1.38)
+     - valence 0.77 vs target 0.85 (+0.46)
+     - acousticness 0.05 vs target 0.20 (+0.42)
+
+3. Rooftop Lights by Indigo Parade
+   Score: 3.27 / 5.00
+     - mood match: happy (+1.0)
+     - energy 0.76 vs target 0.85 (+1.36)
+     - valence 0.81 vs target 0.85 (+0.48)
+     - acousticness 0.35 vs target 0.20 (+0.43)
+
+4. Lift Off Tonight by Prism Rush
+   Score: 2.25 / 5.00
+     - energy 0.95 vs target 0.85 (+1.35)
+     - valence 0.88 vs target 0.85 (+0.48)
+     - acousticness 0.02 vs target 0.20 (+0.41)
+
+5. Crown the Block by Kilo Vance
+   Score: 2.22 / 5.00
+     - energy 0.78 vs target 0.85 (+1.40)
+     - valence 0.62 vs target 0.85 (+0.39)
+     - acousticness 0.08 vs target 0.20 (+0.44)
+
+==================================================
+
+==================================================
+ Top Recommendations: Chill Lofi
+==================================================
+
+1. Midnight Coding by LoRoom
+   Score: 4.91 / 5.00
+     - genre match: lofi (+1.5)
+     - mood match: chill (+1.0)
+     - energy 0.42 vs target 0.40 (+1.47)
+     - valence 0.56 vs target 0.60 (+0.48)
+     - acousticness 0.71 vs target 0.80 (+0.45)
+
+2. Library Rain by Paper Lanterns
+   Score: 4.89 / 5.00
+     - genre match: lofi (+1.5)
+     - mood match: chill (+1.0)
+     - energy 0.35 vs target 0.40 (+1.42)
+     - valence 0.60 vs target 0.60 (+0.50)
+     - acousticness 0.86 vs target 0.80 (+0.47)
+
+3. Focus Flow by LoRoom
+   Score: 3.99 / 5.00
+     - genre match: lofi (+1.5)
+     - energy 0.40 vs target 0.40 (+1.50)
+     - valence 0.59 vs target 0.60 (+0.49)
+     - acousticness 0.78 vs target 0.80 (+0.49)
+
+4. Spacewalk Thoughts by Orbit Bloom
+   Score: 3.24 / 5.00
+     - mood match: chill (+1.0)
+     - energy 0.28 vs target 0.40 (+1.32)
+     - valence 0.65 vs target 0.60 (+0.47)
+     - acousticness 0.92 vs target 0.80 (+0.44)
+
+5. Coffee Shop Stories by Slow Stereo
+   Score: 2.35 / 5.00
+     - energy 0.37 vs target 0.40 (+1.46)
+     - valence 0.71 vs target 0.60 (+0.45)
+     - acousticness 0.89 vs target 0.80 (+0.46)
+
+==================================================
+
+==================================================
+ Top Recommendations: Deep Intense Rock
+==================================================
+
+1. Storm Runner by Voltline
+   Score: 4.90 / 5.00
+     - genre match: rock (+1.5)
+     - mood match: intense (+1.0)
+     - energy 0.91 vs target 0.92 (+1.48)
+     - valence 0.48 vs target 0.40 (+0.46)
+     - acousticness 0.10 vs target 0.20 (+0.45)
+
+2. Gym Hero by Max Pulse
+   Score: 3.22 / 5.00
+     - mood match: intense (+1.0)
+     - energy 0.93 vs target 0.92 (+1.48)
+     - valence 0.77 vs target 0.40 (+0.32)
+     - acousticness 0.05 vs target 0.20 (+0.42)
+
+3. Ashes and Iron by Grimhold
+   Score: 2.27 / 5.00
+     - energy 0.97 vs target 0.92 (+1.43)
+     - valence 0.25 vs target 0.40 (+0.42)
+     - acousticness 0.03 vs target 0.20 (+0.41)
+
+4. Night Drive Loop by Neon Echo
+   Score: 2.19 / 5.00
+     - energy 0.75 vs target 0.92 (+1.24)
+     - valence 0.49 vs target 0.40 (+0.46)
+     - acousticness 0.22 vs target 0.20 (+0.49)
+
+5. Lift Off Tonight by Prism Rush
+   Score: 2.12 / 5.00
+     - energy 0.95 vs target 0.92 (+1.46)
+     - valence 0.88 vs target 0.40 (+0.26)
+     - acousticness 0.02 vs target 0.20 (+0.41)
+
+==================================================
+```
 
 ---
 
